@@ -4,7 +4,8 @@ if (Meteor.isClient) {
   // This code only runs on the client
   Template.body.helpers({
     tasks: function () {
-      return Tasks.find({});
+      // Show newest tasks first
+      return Tasks.find({}, {sort: {createdAt: -1}});
     }
   });
     
@@ -12,7 +13,7 @@ if (Meteor.isClient) {
 Template.body.events({
   "submit .new-task": function (event) {
     // This function is called when the new task form is submitted
-
+      console.log(event)
     var text = event.target.text.value;
 
     Tasks.insert({
